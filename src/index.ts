@@ -4,11 +4,12 @@ import { CRATES_FOLDER } from './util';
 import Crate from './Crate';
 import chokidar from 'chokidar';
 
+require('dotenv').config()
 
 
-const SERATO_PATH = "/home/mookie/programming/_Serato_";
+const SERATO_PATH: string = process.env.SERATO_PATH || "";
 const PATH = path.join(SERATO_PATH, "Subcrates");
-
+debugger;
 
 // Initialize watcher.
 const watcher = chokidar.watch(SERATO_PATH, {
