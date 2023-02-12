@@ -20,5 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
+      - run: |
+          npm test
         with:
           milliseconds: 1000
