@@ -22,5 +22,3 @@ jobs:
       - uses: ./
       - run: |
           npm test
-        with:
-          milliseconds: 1000
