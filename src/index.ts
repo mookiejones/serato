@@ -81,7 +81,7 @@ const crates = listCratesSync(PATH);
 
 for (let crate of crates) {
 
-    const songPaths = crate.getSongPathsSync();
+    const songPaths = crate.getSongPathsSync() || [];
     for (let songPath of songPaths) {
         console.log(songPath);
 
