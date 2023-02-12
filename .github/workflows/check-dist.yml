@@ -3,7 +3,7 @@
 # `index.js` is the code that will run.
 # For our project, we generate this file through a build process from other source files.
 # We need to make sure the checked-in `index.js` actually matches what we expect it to be.
-name: Check dist/
+name: Check dist
 
 on:
   push:
@@ -32,10 +32,7 @@ jobs:
         run: yarn install
 
       - name: Rebuild the dist/ directory
-        run: |
-          yarn build
-          yarn package
-
+        run: yarn all
 
       - name: action-yarn
         # You may pin to the exact commit or the version.
