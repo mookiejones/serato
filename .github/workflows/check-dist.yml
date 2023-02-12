@@ -32,7 +32,7 @@ jobs:
         run: yarn install
 
       - name: Rebuild the dist/ directory
-        run: yarn all
+        run: yarn build
 
       - name: action-yarn
         # You may pin to the exact commit or the version.
