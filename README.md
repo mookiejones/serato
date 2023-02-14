@@ -3,7 +3,6 @@
 # DONT USE THIS !!!
 This doesnt work yet, but while am working it out, i am also learning other devops functions
 
-
 A Typescript library designed to read Database, Song, and Crate info from Serato
 
 ## Summary
