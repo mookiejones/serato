@@ -1,5 +1,5 @@
 {
-  "name": "serato",
+  "name": "@mookiejones/serato",
   "version": "1.0.0",
   "main": "dist",
   "repository": "git@github.com:mookiejones/serato_js.git",
