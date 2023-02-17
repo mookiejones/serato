@@ -135,6 +135,18 @@ COMMENT_FIELD,
 GROUP_FIELD,
 COMPOSER_FIELD,
 YEAR_FIELD,
+blop:'blop',
+bitu:'bitu',
+bovc:'bovc',
+bcrt:'bcrt',
+biro:'biro',
+bwlb:'bwlb',
+bwll:'bwll',
+buns:'buns',
+bbgl:'bbgl',
+bkrk:'bkrk',
+uadd:'uadd',
+ulbl:'ulbl'
 
     }
 const Keys = {

@@ -1,7 +1,7 @@
 {
   "name": "serato",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist",
   "repository": "git@github.com:mookiejones/serato_js.git",
   "author": "Charles Heath Berman <Charles.Heath.Berman@gmail.com>",
   "license": "MIT",
@@ -39,5 +39,10 @@
   "dependencies": {
     "chokidar": "^3.5.3",
     "dotenv": "^16.0.3"
+  },
+  "jest": {
+    "verbose": true,
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   }
 }

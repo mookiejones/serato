@@ -1,4 +1,4 @@
-import {readFileSync} from 'fs';
+import {writeFileSync,readdirSync} from 'fs';
 import path from 'path';
 import { CRATES_FOLDER } from './util';
 import Crate from './Crate';
@@ -7,32 +7,38 @@ import chokidar from 'chokidar';
 import { config } from 'dotenv';
 import Config from './util/Config';
 import Database from './Database';
-import Song from './Song';
-config();
- 
+
+export { default as Crate } from './Crate';
+export { default as Database } from './Database';
+
+
+export { listCrates, listCratesSync } from './listCrates';
+
+export { default as getDefaultPath } from './util/getDefaultPath';
+
+
+const isDebug =
+  process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true';
+
+  
+  if(isDebug){
+    config();
+
 
 const seratoConfig = new Config();
 
 
 
-const data = readFileSync(seratoConfig.serato_path,{encoding:'ascii',flag:'r'});
-const otrk = Buffer.from('otrk');
 
+ 
+const db = Database.getDatabase(seratoConfig.serato_path);
 
-const lines = data.split('otrk');
+const savePath=path.join(__dirname,'json.json');
+const json = JSON.stringify(db);
+debugger;
+writeFileSync(savePath,json);
 
-const createSong = (value:string,index:number,arr:string[])=>{
-
-    const song = new Song(value,index,arr);
-    return song;
-}
-
-const songs = lines
-.filter((value:string,index:number,array:string[])=>index!=0)
-.map(createSong);
-
-
-
+console.log(`saved file to ${savePath}`)
 debugger;
 
 
@@ -100,7 +106,7 @@ const listDatabaseSync = (directory:string = seratoConfig.serato_path)=>{
 const seratoDatabase = listDatabaseSync(seratoConfig.serato_path)
 
 const listCratesSync = (subcratesFolder = CRATES_FOLDER): Crate[] => {
-    const crates = fs.readdirSync(subcratesFolder).map(x => {
+    const crates = readdirSync(subcratesFolder).map(x => {
         const name = path.basename(x, ".crate");
         return new Crate(name, subcratesFolder);
     });
@@ -109,3 +115,4 @@ const listCratesSync = (subcratesFolder = CRATES_FOLDER): Crate[] => {
 
  
 
+  }

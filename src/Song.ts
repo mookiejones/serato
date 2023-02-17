@@ -108,7 +108,7 @@ class Song {
     static create(dbString: string): Song {
 
 
-        let toRet = new Song();
+        let toRet = new Song(dbString,-1,[]);
 
         for (let farthestReached = 0; farthestReached < dbString.length;) {
             let startOfString = -1;
@@ -187,6 +187,7 @@ class Song {
         return toRet;
     }
 
+    
     findSong(o:string,value:string){
         return {
             key:o,
@@ -202,66 +203,107 @@ class Song {
         
         const fieldsIndex = _.sortBy(fields,'position')
        
+        for(let idx in fieldsIndex){
 
-        debugger;
+            const i = parseInt(idx);
+
+            const {key,position} = fieldsIndex[i];
+
+            // does next index exist?
+            let exists = i<fieldsIndex.length-1;
+
+            try 
+            {
+            const rawValue = exists
+                                ? value.substring(position+key.length,fieldsIndex[i+1].position)
+                                :value.substring(position+key.length);
+
+
+
+            Song.assignStringField(this,key,rawValue);
+            }catch(e:any){
+                debugger;
+            }
+        }
+
+        
     }
 
-    private static assignStringField(s: Song, f: string, v: string): Song {
-        switch (f) {
+    private static assignStringField(song: Song, field: string, value: string): Song {
+        switch (field) {
             case Fields.TYPE_FIELD:
-                s.Type = v;
+                song.Type = value;
                 break;
             case Fields.PATH_FIELD:
-                s.PathString = v;
+                song.PathString = value;
                 break;
             case Fields.SONG_FIELD:
-                s.Title = v;
+                song.Title = value;
                 break;
             case Fields.ARTIST_FIELD:
-                s.Artist = v;
+                song.Artist = value;
                 break;
             case Fields.ALBUM_FIELD:
-                s.Album = v;
+                song.Album = value;
                 break;
             case Fields.GENRE_FIELD:
-                s.Genre = v;
+                song.Genre = value;
                 break;
             case Fields.LENGTH_FIELD:
-                s.Length = v;
+                song.Length = value;
                 break;
             case Fields.SIZE_FIELD:
-                s.Size = v;
+                song.Size = value;
                 break;
             case Fields.BITRATE_FIELD:
-                s.Bitrate = v;
+                song.Bitrate = value;
                 break;
             case Fields.SAMPLE_RATE_FIELD:
-                s.SampleRate = v;
+                song.SampleRate = value;
                 break;
             case Fields.BPM_FIELD:
-                s.Bpm = v;
+                song.Bpm = value;
                 break;
             case Fields.COMMENT_FIELD:
-                s.Comment = v;
+                song.Comment = value;
                 break;
             case Fields.GROUP_FIELD:
-                s.Group = v;
+                song.Group = value;
                 break;
             case Fields.LABEL_FIELD:
                 break;
             case Fields.COMPOSER_FIELD:
-                s.Composer = v;
+                song.Composer = value;
                 break;
             case Fields.YEAR_FIELD:
-                s.Year = v;
+                song.Year = value;
                 break;
             case Fields.DATE_ADDED_FIELD:
                 break;
             case Fields.KEY_FIELD:
-                s.Key = v;
+                song.Key = value;
                 break;
+                case 'blop':
+case 'bitu':
+case 'bovc':
+case 'bcrt':
+case 'biro':
+case 'bwlb':
+case 'bwll':
+case 'buns':
+case 'bbgl':
+case 'bkrk':
+    case'bply':
+
+            case 'bmis':
+                case 'uadd':
+                    case 'ulbl':
+                break; 
+                default:
+                    debugger;
+                    break;
         }
-        return s;
+        return song;
     }
 
 

@@ -24,49 +24,26 @@ class Database {
 
     private constructor(filePath: string) {       
         this.filePath = filePath;
-        this.parse();
+        this.parseFile();
     }
 
-    tryThis(){
-
-        const binary = fs.readFileSync(this.filePath);
-
-        const d = binary.length /8;
-        for(let i=0;i<binary.length;i=i+8){
-
-            const bufferBinary = Buffer.from(binary,i,1);
-            const bufferLine = bufferBinary.toString('ascii')
-debugger;        }
+    private parseFile(){
+        let contents = fs.readFileSync(this.filePath,'ascii');
 
 
-const items=        binary.some((value:number,index,array:Uint8Array)=>{
-            debugger;
-            return true;
-        })
+        let lines = contents.split('otrk')
+            .filter((value:string,index:number,array:string[])=>index!=0)
+            .map((value:string,index:number,array:string[])=>new Song(value,index,array));
 
+            this.songs = lines;
 
-
-        for(let type of encodingOptions){
-
-            const flag = Buffer.isEncoding(type);
-            console.log(`type:${type},flag:${flag}`)
-
-
-        }
-        debugger;
-        const binaryString = binary.toString('ascii');
-
-        
-
-        const split = binaryString.split(OTRK);
-
-        debugger;
 
     }
-
+     
     parse() {
 
-        this.tryThis();
+        this.parseFile();
+        return;
 
 
         const contents = fs.readFileSync(this.filePath, "ascii")
