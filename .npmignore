@@ -3,3 +3,4 @@ dist/tests
 .github
 src
 .env
+.tsconfig.json
