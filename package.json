@@ -36,7 +36,7 @@
     "build": "npx tsc",
     "package": "ncc build --source-map --license licenses.txt",
     "all": "npm run clean && npm run build &&  npm run package && npm test",
-    "pub": "npm version patch --force && npm publish"
+    "pub": "npm version patch --force && npm publish --access=public"
   },
   "dependencies": {
     "chokidar": "^3.5.3",
