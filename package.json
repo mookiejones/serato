@@ -1,7 +1,8 @@
 {
   "name": "@mookiejones/serato",
   "version": "1.0.0",
-  "main": "dist",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "git@github.com:mookiejones/serato_js.git",
   "author": "Charles Heath Berman <Charles.Heath.Berman@gmail.com>",
   "license": "MIT",
