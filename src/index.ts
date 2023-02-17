@@ -1,18 +1,44 @@
-import fs from 'fs';
+import {readFileSync} from 'fs';
 import path from 'path';
 import { CRATES_FOLDER } from './util';
 import Crate from './Crate';
 import chokidar from 'chokidar';
 
-require('dotenv').config()
+import { config } from 'dotenv';
+import Config from './util/Config';
+import Database from './Database';
+import Song from './Song';
+config();
+ 
+
+const seratoConfig = new Config();
 
 
-const SERATO_PATH: string = process.env.SERATO_PATH || "";
-const PATH = path.join(SERATO_PATH, "Subcrates");
+
+const data = readFileSync(seratoConfig.serato_path,{encoding:'ascii',flag:'r'});
+const otrk = Buffer.from('otrk');
+
+
+const lines = data.split('otrk');
+
+const createSong = (value:string,index:number,arr:string[])=>{
+
+    const song = new Song(value,index,arr);
+    return song;
+}
+
+const songs = lines
+.filter((value:string,index:number,array:string[])=>index!=0)
+.map(createSong);
+
+
+
 debugger;
 
+
+
 // Initialize watcher.
-const watcher = chokidar.watch(SERATO_PATH, {
+const watcher = chokidar.watch(seratoConfig.serato_path, {
     ignored: /(^|[\/\\])\../, // ignore dotfiles
     persistent: true
 });
@@ -66,7 +92,12 @@ watcher.on('change', (path, stats) => {
 // });
 
 
+const listDatabaseSync = (directory:string = seratoConfig.serato_path)=>{
+    const db = Database.getDatabase(directory);
+    return db;
+}
 
+const seratoDatabase = listDatabaseSync(seratoConfig.serato_path)
 
 const listCratesSync = (subcratesFolder = CRATES_FOLDER): Crate[] => {
     const crates = fs.readdirSync(subcratesFolder).map(x => {
@@ -76,15 +107,5 @@ const listCratesSync = (subcratesFolder = CRATES_FOLDER): Crate[] => {
     return crates;
 }
 
-
-const crates = listCratesSync(PATH);
-
-for (let crate of crates) {
-
-    const songPaths = crate.getSongPathsSync() || [];
-    for (let songPath of songPaths) {
-        console.log(songPath);
-
-    }
-}
+ 
 

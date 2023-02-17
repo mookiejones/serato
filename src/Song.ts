@@ -1,7 +1,7 @@
 
 
 import { labels,Fields } from './util/Keys'
-
+import _ from 'lodash'
 
 class Song {
 
@@ -187,8 +187,24 @@ class Song {
         return toRet;
     }
 
+    findSong(o:string,value:string){
+        return {
+            key:o,
+            position:value.indexOf(o)
+        }
+    }
+    constructor(value:string,index:number,arr:string[]){
 
+ 
+        const fields=Object.values(Fields)
+        .map(o=>this.findSong(o,value))
+        .filter(i=>i.position !=-1)
+        
+        const fieldsIndex = _.sortBy(fields,'position')
+       
 
+        debugger;
+    }
 
     private static assignStringField(s: Song, f: string, v: string): Song {
         switch (f) {
