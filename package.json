@@ -35,7 +35,8 @@
     "clean": "rimraf ./dist && rimraf ./coverage",
     "build": "npx tsc",
     "package": "ncc build --source-map --license licenses.txt",
-    "all": "npm run clean && npm run build &&  npm run package && npm test"
+    "all": "npm run clean && npm run build &&  npm run package && npm test",
+    "pub": "npm version patch --force && npm publish"
   },
   "dependencies": {
     "chokidar": "^3.5.3",
